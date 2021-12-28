@@ -12,13 +12,28 @@ INSERT INTO Miasta VALUES
 	('Mława'),
 	('Nowy Sącz')
 
+INSERT INTO Kategorie_przestepstw VALUES
+	('zabójstwo'),
+	('pobicie'),
+	('gwałt'),
+	('kradzież'),
+	('włamanie'),
+	('rozbój'),
+	('oszustwo'),
+	('paserstwo'),
+	('naruszenie zakazu sądowego'),
+	('znieważenie funkcjonariusza'),
+	('uchylanie się od alimentów'),
+	('znęcanie się'),
+	('groźba karalna')
+
 INSERT INTO Jednostki_organizacyjne VALUES
 	('Komenda Miejska Policji', 'ul. Portowa 15/6', 'Gdynia'),
 	('Komisariat Policji nr 3', 'ul. Biała 1a', 'Gdańsk'),
 	('Posterunek Policji im. Jana Pawła Drugiego', 'ul. Mała 3', 'Warszawa'),
 	('Komenda Powiatowa Policji', 'ul. Wojska Polskiego 8/8', 'Kędzierzyn-Koźle'),
 	('Komisariat Policji nr 1', 'ul. Kędzierzyno-Kozielska 3', 'Wodzisław Śląski'),
-	('Komenda Gminna Policji im. Św. Piotra Makowca-Górkowskiego', 'ul. Bagnista 4/20', 'Gniewino'),
+	('Komenda Gminna Policji im. Makowca-Górkowskiego', 'ul. Bagnista 4/20', 'Gniewino'),
 	('Komisariat Policji nr 1', 'ul. Konfidencka 60', 'Gniewino'),
 	('Komenda Miejska Policji', 'ul. Grzybkowa 37/21', 'Bydgoszcz'),
 	('Posterunek Policji im. Natalii O.', 'ul. Strojna 6/9', 'Żołędowo'),
@@ -40,7 +55,6 @@ INSERT INTO Areszty VALUES
 	('Areszt Śledczy', 'ul. Henryka Sienkiewicza 10', 'Szczytno'),
 	('Areszt Śledczy', 'ul. Petersena 15', 'Mława'),
 	('Areszt Śledczy im. Damiana Ciurei Rodrigeza', 'ul. Bieszczadzka 15', 'Nowy Sącz')
-
 
 INSERT INTO Oddzialy VALUES ('OD00001', (SELECT ID_jednostki FROM Jednostki_organizacyjne WHERE nazwa_jednostki = 'Komenda Miejska Policji' AND Miasto = 'Gdynia'))
 INSERT INTO Policjanci VALUES 
@@ -65,49 +79,43 @@ INSERT INTO Oddzialy VALUES ('OD00004', (SELECT ID_jednostki FROM Jednostki_orga
 	('Jakub', 'Wiśniewski', 22, 'starszy posterunkowy', 'OD00004')
 
 INSERT INTO Zglaszajacy VALUES ('Piotr', 'Górkowski', 20)
-INSERT INTO Interwencje VALUES ('Skwer Kościuszki', 2020-12-30, '20:02', 'OD00002', IDENT_CURRENT('Zglaszajacy'))
-INSERT INTO Przestepstwa VALUES (2020-12-30, '19:00', IDENT_CURRENT('Interwencje'))
+INSERT INTO Interwencje VALUES ('Skwer Kościuszki', '2020-12-30', '20:02', 'OD00002', IDENT_CURRENT('Zglaszajacy'))
+INSERT INTO Przestepstwa VALUES ('2020-12-30', '19:00', IDENT_CURRENT('Interwencje'), 'pobicie')
 
-INSERT INTO Interwencje VALUES ('ul. Sezamkowa', 2021-06-22, '11:11', 'OD00001', NULL)
-INSERT INTO Przestepstwa VALUES (2020-12-30, '19:00', IDENT_CURRENT('Interwencje'))
+INSERT INTO Interwencje VALUES ('ul. Sezamkowa', '2021-06-22', '11:11', 'OD00001', NULL)
+INSERT INTO Przestepstwa VALUES ('2021-06-22', '11:11', IDENT_CURRENT('Interwencje'), 'znieważenie funkcjonariusza')
 
 INSERT INTO Zglaszajacy VALUES ('Imiesław', 'Nazwiskowy', 55)
-INSERT INTO Interwencje VALUES ('ul. Arbuzowa', 2021-07-01, '01:23', 'OD00001', IDENT_CURRENT('Zglaszajacy'))
-INSERT INTO Przestepstwa VALUES (2020-12-30, '19:00', IDENT_CURRENT('Interwencje'))
+INSERT INTO Interwencje VALUES ('ul. Arbuzowa', '2021-07-01', '01:23', 'OD00001', IDENT_CURRENT('Zglaszajacy'))
+INSERT INTO Przestepstwa VALUES ('2021-07-01', '01:13', IDENT_CURRENT('Interwencje'), 'gwałt')
 
-	
-	--('Piotr', 'Prostowski', 21),
-	--('Łukasz', 'Pudliszki', 21),
-	--('Grażyna', 'Żarko', 65),
-	--('Piotr', 'Kamieniarz', 42),
-	--('Sebastian', 'Problemowy', 30),
-	--('Andrzej', 'Piotrowski-Niziński', 40),
-	--('Adam', 'Karpiński Rybak', 50),
-	--('Renata', 'Rączkowska', 22),
-	--('Wierzchosława', 'Trujak', 100)
+INSERT INTO Zglaszajacy VALUES ('Piotr', 'Prostowski', 21)
+INSERT INTO Interwencje VALUES ('ul. Gruszana', '2021-09-25', '02:30', 'OD00002', IDENT_CURRENT('Zglaszajacy'))
+INSERT INTO Przestepstwa VALUES ('2021-09-25', '00:30', IDENT_CURRENT('Interwencje'), 'włamanie')
 
-INSERT INTO Interwencje VALUES
-	('ul. Arbuzowa', 2021-07-01, '01:23', 'OD00001', NULL),
-	('ul. Gruszana', 2021-09-25, '02:30', 'OD00002', (SELECT ID_zglaszajacego FROM Zglaszajacy WHERE imie = 'Piotr' AND Nazwisko = 'Kamieniarz' AND Miasto = 'Gniewino')),
-	('ul. Truskawkowa', 2005-04-02, '21:37', 'OD00001', NULL),
-	('ul. Srebrna', 2021-11-22, '15:44', 'OD00001', NULL),
-	('ul. Żeliwna', 2021-03-05, '07:55', 'OD00001', NULL),
-	('ul. Stalowa', 2021-02-21, '03:33', 'OD00001', NULL),
-	('ul. Ogórkowa', 2021-01-30, '22:01', 'OD00001', NULL),
-	('ul. Pistacjowa', 2021-04-17, '17:20', 'OD00001', NULL),
-	('ul. Orzechowa', 2021-04-13, '14:01', 'OD00001', NULL)
+INSERT INTO Zglaszajacy VALUES ('Łukasz', 'Pudliszki', 21)
+INSERT INTO Interwencje VALUES ('ul. Truskawkowa', '2005-04-02', '21:38', 'OD00001', IDENT_CURRENT('Zglaszajacy'))
+INSERT INTO Przestepstwa VALUES ('2005-04-02', '21:37', IDENT_CURRENT('Interwencje'), 'zabójstwo')
 
-INSERT INTO Kategorie_przestepstw VALUES
-	('zabójstwo'),
-	('pobicie'),
-	('gwałt'),
-	('kradzież'),
-	('włamanie'),
-	('rozbój'),
-	('oszustwo'),
-	('paserstwo'),
-	('naruszenie zakazu sądowego'),
-	('znieważenie funkcjonariusza'),
-	('uchylanie się od alimentów'),
-	('znęcanie się'),
-	('groźba karalna')
+INSERT INTO Zglaszajacy VALUES ('Grażyna', 'Żarko', 65)
+INSERT INTO Interwencje VALUES ('ul. Srebrna', '2021-11-22', '15:50', 'OD00001', IDENT_CURRENT('Zglaszajacy'))
+
+INSERT INTO Zglaszajacy VALUES ('Piotr', 'Kamieniarz', 42)
+INSERT INTO Interwencje VALUES ('ul. Żeliwna', '2021-03-05', '07:55', 'OD00001', IDENT_CURRENT('Zglaszajacy'))
+INSERT INTO Przestepstwa VALUES ('2021-03-05', '05:55', IDENT_CURRENT('Interwencje'), 'rozbój')
+
+INSERT INTO Zglaszajacy VALUES ('Sebastian', 'Problemowy', 30)
+INSERT INTO Interwencje VALUES ('ul. Stalowa', '2021-02-21', '03:33', 'OD00001', IDENT_CURRENT('Zglaszajacy'))
+INSERT INTO Przestepstwa VALUES ('2021-02-21', '06:00', IDENT_CURRENT('Interwencje'), 'groźba karalna')
+
+INSERT INTO Zglaszajacy VALUES ('Andrzej', 'Piotrowski-Niziński', 40)
+INSERT INTO Interwencje VALUES ('ul. Ogórkowa', '2021-01-30', '22:01', 'OD00001', IDENT_CURRENT('Zglaszajacy'))
+INSERT INTO Przestepstwa VALUES ('2021-01-30', '20:01', IDENT_CURRENT('Interwencje'), 'paserstwo')
+
+INSERT INTO Zglaszajacy VALUES ('Adam', 'Karpiński Rybak', 50)
+INSERT INTO Interwencje VALUES ('ul. Pistacjowa', '2021-04-17', '17:20', 'OD00001', IDENT_CURRENT('Zglaszajacy'))
+INSERT INTO Przestepstwa VALUES ('2021-04-17', '17:00', IDENT_CURRENT('Interwencje'), 'oszustwo')
+
+INSERT INTO Zglaszajacy VALUES ('Renata', 'Rączkowska', 22)
+INSERT INTO Interwencje VALUES ('ul. Orzechowa', '2021-04-13', '14:01', 'OD00001', IDENT_CURRENT('Zglaszajacy'))
+INSERT INTO Przestepstwa VALUES ('2021-04-13', '13:30', IDENT_CURRENT('Interwencje'), 'naruszenie zakazu sądowego')
