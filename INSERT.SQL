@@ -14,7 +14,7 @@ INSERT INTO Miasta VALUES
 INSERT INTO Kategorie_przestepstw VALUES
 	('zabójstwo'),
 	('pobicie'),
-	('gwałt'),
+	('molestowanie'),
 	('kradzież'),
 	('włamanie'),
 	('rozbój'),
@@ -26,6 +26,7 @@ INSERT INTO Kategorie_przestepstw VALUES
 	('znęcanie się'),
 	('groźba karalna'),
 	('używanie wykrywacza metali bez zezwolenia'),
+	('cudzołóstwo bez zgody drugiej osoby'),
 	('handel środkami odurzającymi')
 
 INSERT INTO Jednostki_organizacyjne VALUES
@@ -146,7 +147,8 @@ INSERT INTO Zglaszajacy VALUES
 	('01261106408', 'Adam', 'Karpiński Rybak', 50),
 	('01261106409', 'Renata', 'Rączkowska', 22),
 	('01261106410', 'Krystian', 'Kąkol', 34),
-	('01261106411', 'Adrian', 'Garzombke', 31)
+	('01261106411', 'Adrian', 'Garzombke', 31),
+	('01261106412', 'Alina', 'Pechowa', 75)
 
 INSERT INTO Poszkodowani VALUES 
 	('01261106500', 'Piotr','Dółkowski',21),
@@ -160,7 +162,9 @@ INSERT INTO Poszkodowani VALUES
 	('01261106508', 'Adrian', 'Garzombke', 31),
 	('01261106509', 'Renata', 'Rączkowska', 22),
 	('01261106510', 'Jakub','Heisenberg',33),
-	('01261106511', 'Adam', 'Ostrowski Rybak', 50)
+	('01261106511', 'Adam', 'Ostrowski Rybak', 50),
+	('01261106512', 'Emilia', 'Rycerz', 18),
+	('01261106513', 'Jarosław', 'Pechowy', 50)
 
 INSERT INTO Przestepcy VALUES
 	('01261106600', 'Michał', 'Mlecz', 21),
@@ -174,7 +178,9 @@ INSERT INTO Przestepcy VALUES
 	('01261106608', 'Jakub', 'Bieszke', 36),
 	('01261106609', 'Magdalena', 'Krupnik', 49),
 	('01261106400', 'Piotr', 'Górkowski', 21),
-	('01261106610', 'Eugeniusz', 'Kepke', 53)
+	('01261106610', 'Eugeniusz', 'Kepke', 53),
+	('01261106611', 'Michał', 'Koniczyna', 19),
+	('01261106612', 'Michał', 'Mściwy', 50)
 
 INSERT INTO Interwencje VALUES ('Skwer Kościuszki', '2020-12-30', '20:02', 'OD00001', '01261106400')
 INSERT INTO Przestepstwa VALUES ('2020-12-30', '19:00', IDENT_CURRENT('Interwencje'), 'pobicie')
@@ -192,7 +198,7 @@ INSERT INTO Przestepstwa VALUES ('2021-06-22', '11:11', IDENT_CURRENT('Interwenc
 INSERT INTO Popelnianie_przestepstwa VALUES (IDENT_CURRENT('Przestepstwa'),'01261106601')
 
 INSERT INTO Interwencje VALUES ('ul. Arbuzowa', '2021-07-01', '01:23', 'OD00003', '01261106402')
-INSERT INTO Przestepstwa VALUES ('2021-07-01', '01:13', IDENT_CURRENT('Interwencje'), 'gwałt')
+INSERT INTO Przestepstwa VALUES ('2021-07-01', '01:13', IDENT_CURRENT('Interwencje'), 'molestowanie')
 INSERT INTO Wyrzadzanie_szkody VALUES (IDENT_CURRENT('Przestepstwa'),'01261106402')
 INSERT INTO Popelnianie_przestepstwa VALUES (IDENT_CURRENT('Przestepstwa'),'01261106602')
 INSERT INTO Pobyt_w_areszcie VALUES ('01261106602', (SELECT ID_aresztu FROM Areszty WHERE nazwa_aresztu = 'Areszt Śledczy im. Jana Pawła Drugiego' AND Miasto = 'Warszawa'))
@@ -218,13 +224,13 @@ INSERT INTO Interwencje VALUES ('ul. Stalowa', '2021-02-21', '03:33', 'OD00008',
 INSERT INTO Przestepstwa VALUES ('2021-02-21', '06:00', IDENT_CURRENT('Interwencje'), 'groźba karalna')
 INSERT INTO Wyrzadzanie_szkody VALUES (IDENT_CURRENT('Przestepstwa'),'01261106507')
 INSERT INTO Popelnianie_przestepstwa VALUES (IDENT_CURRENT('Przestepstwa'),'01261106607')
-INSERT INTO Pobyt_w_areszcie VALUES ('01261106606', (SELECT ID_aresztu FROM Areszty WHERE nazwa_aresztu = 'Areszt Śledczy nr 2' AND Miasto = 'Kędzierzyn-Koźle'))
+INSERT INTO Pobyt_w_areszcie VALUES ('01261106607', (SELECT ID_aresztu FROM Areszty WHERE nazwa_aresztu = 'Areszt Śledczy nr 2' AND Miasto = 'Kędzierzyn-Koźle'))
 
 INSERT INTO Interwencje VALUES ('ul. Ogórkowa', '2021-01-30', '22:01', 'OD00009', '01261106408')
 INSERT INTO Przestepstwa VALUES ('2021-01-30', '20:01', IDENT_CURRENT('Interwencje'), 'paserstwo')
 INSERT INTO Wyrzadzanie_szkody VALUES (IDENT_CURRENT('Przestepstwa'),'01261106508')
 INSERT INTO Popelnianie_przestepstwa VALUES (IDENT_CURRENT('Przestepstwa'),'01261106608')
-INSERT INTO Pobyt_w_areszcie VALUES ('01261106606', (SELECT ID_aresztu FROM Areszty WHERE nazwa_aresztu = 'Areszt Śledczy im. Piotra Cuckowskiego' AND Miasto = 'Żołędowo'))
+INSERT INTO Pobyt_w_areszcie VALUES ('01261106608', (SELECT ID_aresztu FROM Areszty WHERE nazwa_aresztu = 'Areszt Śledczy im. Piotra Cuckowskiego' AND Miasto = 'Żołędowo'))
 
 INSERT INTO Interwencje VALUES ('ul. Pistacjowa', '2021-04-17', '17:20', 'OD00010', '01261106409')
 INSERT INTO Przestepstwa VALUES ('2021-04-17', '17:00', IDENT_CURRENT('Interwencje'), 'oszustwo')
@@ -234,3 +240,22 @@ INSERT INTO Interwencje VALUES ('ul. Orzechowa', '2021-04-13', '14:01', 'OD00011
 INSERT INTO Przestepstwa VALUES ('2021-04-13', '13:30', IDENT_CURRENT('Interwencje'), 'naruszenie zakazu sądowego')
 INSERT INTO Wyrzadzanie_szkody VALUES (IDENT_CURRENT('Przestepstwa'),'01261106510')
 INSERT INTO Popelnianie_przestepstwa VALUES (IDENT_CURRENT('Przestepstwa'),'01261106610')
+INSERT INTO Pobyt_w_areszcie VALUES ('01261106610', (SELECT ID_aresztu FROM Areszty WHERE nazwa_aresztu = 'Areszt Śledczy' AND Miasto = 'Szczytno'))
+
+INSERT INTO Interwencje VALUES ('ul. Biała', '2020-03-12', '12:38', 'OD00012', '01261106411')
+INSERT INTO Przestepstwa VALUES ('2020-03-12', '11:30', IDENT_CURRENT('Interwencje'), 'cudzołóstwo bez zgody drugiej osoby')
+INSERT INTO Wyrzadzanie_szkody VALUES (IDENT_CURRENT('Przestepstwa'),'01261106511')
+INSERT INTO Popelnianie_przestepstwa VALUES (IDENT_CURRENT('Przestepstwa'),'01261106611')
+INSERT INTO Pobyt_w_areszcie VALUES ('01261106611', (SELECT ID_aresztu FROM Areszty WHERE nazwa_aresztu = 'Areszt Śledczy im. Damiana Ciurei Rodrigeza' AND Miasto = 'Nowy Sącz'))
+
+INSERT INTO Interwencje VALUES ('ul. Kazimierza Wielkiego', '2019-08-11', '12:38', 'OD00003', '01261106412')
+INSERT INTO Przestepstwa VALUES ('2019-08-11', '11:30', IDENT_CURRENT('Interwencje'), 'kradzież')
+INSERT INTO Wyrzadzanie_szkody VALUES (IDENT_CURRENT('Przestepstwa'),'01261106513')
+INSERT INTO Popelnianie_przestepstwa VALUES (IDENT_CURRENT('Przestepstwa'),'01261106611')
+INSERT INTO Pobyt_w_areszcie VALUES ('01261106612', (SELECT ID_aresztu FROM Areszty WHERE nazwa_aresztu = 'Areszt Śledczy' AND Miasto = 'Mława'))
+
+INSERT INTO Interwencje VALUES ('ul. Czarna', '2020-03-12', '12:38', 'OD00003', '01261106412')
+INSERT INTO Przestepstwa VALUES ('2020-03-12', '11:30', IDENT_CURRENT('Interwencje'), 'pobicie')
+INSERT INTO Wyrzadzanie_szkody VALUES (IDENT_CURRENT('Przestepstwa'),'01261106513')
+INSERT INTO Popelnianie_przestepstwa VALUES (IDENT_CURRENT('Przestepstwa'),'01261106612')
+INSERT INTO Pobyt_w_areszcie VALUES ('01261106612', (SELECT ID_aresztu FROM Areszty WHERE nazwa_aresztu = 'Areszt Śledczy im. Jana Pawła Drugiego' AND Miasto = 'Warszawa'))
