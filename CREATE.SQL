@@ -93,13 +93,13 @@ CREATE TABLE Popelnianie_przestepstwa(
 	ID_przestepcy char(11) NOT NULL,
 	PRIMARY KEY (ID_przestepstwa, ID_przestepcy),
 	FOREIGN KEY (ID_przestepstwa) REFERENCES Przestepstwa (ID_przestepstwa),
-	FOREIGN KEY (ID_przestepcy) REFERENCES Przestepcy (PESEL) ON DELETE CASCADE
+	FOREIGN KEY (ID_przestepcy) REFERENCES Przestepcy (PESEL) ON DELETE CASCADE ON UPDATE CASCADE
 )
 
 CREATE TABLE Pobyt_w_areszcie(
 	ID_przestepcy char(11) NOT NULL,
 	ID_aresztu int NOT NULL,
 	PRIMARY KEY (ID_przestepcy, ID_aresztu),
-	FOREIGN KEY (ID_przestepcy) REFERENCES Przestepcy (PESEL) ON DELETE CASCADE,
+	FOREIGN KEY (ID_przestepcy) REFERENCES Przestepcy (PESEL) ON DELETE CASCADE ON UPDATE CASCADE,
 	FOREIGN KEY (ID_aresztu) REFERENCES Areszty (ID_aresztu)
 )
