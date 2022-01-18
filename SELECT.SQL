@@ -98,28 +98,23 @@ WHERE Popelnianie_przestepstwa.ID_przestepstwa = Przestepstwa.ID_przestepstwa AN
 Popelnianie_przestepstwa.ID_przestepcy = '01261106600'
 GROUP BY Kategoria_przestepstwa 
 
---Dla każdej kategorii przestępstw znajdź przestępcę, który dokonał najwięcej
+--Dla wybranej kategorii przestępstw znajdź przestępcę, który dokonał najwięcej
 --przestępstw w danej kategorii
-SELECT Nazwa_kategorii, PESEL, imie, 
-nazwisko, MAX(Liczba) AS Liczba_popelnionych
-FROM
-(SELECT Kategorie_przestepstw.Nazwa_kategorii, Przestepcy.PESEL, Przestepcy.imie,
+SELECT Przestepcy.PESEL, Przestepcy.imie,
 Przestepcy.nazwisko, COUNT(Przestepstwa.ID_przestepstwa) AS Liczba
-FROM Kategorie_przestepstw, Przestepstwa, Popelnianie_przestepstwa, Przestepcy
-WHERE Kategorie_przestepstw.Nazwa_kategorii = Przestepstwa.Kategoria_przestepstwa
+FROM Przestepstwa, Popelnianie_przestepstwa, Przestepcy
+WHERE Przestepstwa.Kategoria_przestepstwa = 'znieważenie funkcjonariusza'
 AND Przestepstwa.ID_przestepstwa = Popelnianie_przestepstwa.ID_przestepstwa AND
 Popelnianie_przestepstwa.ID_przestepcy = Przestepcy.PESEL
-GROUP BY Kategorie_przestepstw.Nazwa_kategorii, Przestepcy.PESEL, Przestepcy.imie, Przestepcy.nazwisko) S
-GROUP BY Nazwa_kategorii, PESEL, imie, nazwisko
+GROUP BY Przestepcy.PESEL, Przestepcy.imie, Przestepcy.nazwisko
+ORDER BY COUNT(Przestepstwa.ID_przestepstwa) DESC
 
-
-SELECT DISTINCT ID_jednostki, MAX(Oddzial), MAX(Liczba_interwencji) AS Liczba_interwencji
-FROM
-(SELECT Jednostki_organizacyjne.ID_jednostki, Oddzialy.ID_oddzialu AS Oddzial, 
+--Posortuj oddzialy danych we wszystkich jednostkach malejaco po liczbie interwencji 
+SELECT Jednostki_organizacyjne.ID_jednostki, Oddzialy.ID_oddzialu AS Oddzial, 
 COUNT(Interwencje.ID_interwencji) AS Liczba_interwencji
 FROM Jednostki_organizacyjne, Oddzialy, Interwencje
 WHERE Jednostki_organizacyjne.ID_jednostki = Oddzialy.Jednostka_organizacyjna AND
 Oddzialy.ID_oddzialu = Interwencje.Oddzial
 GROUP BY Jednostki_organizacyjne.ID_jednostki, Oddzialy.ID_oddzialu
-HAVING DATEDIFF(YEAR, MAX(Interwencje.data), '2021-01-18') < 5) S
-GROUP BY ID_jednostki, Oddzial ORDER BY MAX(Oddzial) ASC
+HAVING DATEDIFF(YEAR, MAX(Interwencje.data), '2021-01-18') < 5
+ORDER BY COUNT(Interwencje.ID_interwencji) DESC
